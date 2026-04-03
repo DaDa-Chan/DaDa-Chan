@@ -1,4 +1,7 @@
 main:
+  - title: "CV"
+    url: /cv/
+  
   - title: "Blog"
     url: /blog/
 
@@ -14,5 +17,4 @@ main:
   - title: "Projects"
     url: /projects/
 
-  - title: "CV"
-    url: /cv/
+  
