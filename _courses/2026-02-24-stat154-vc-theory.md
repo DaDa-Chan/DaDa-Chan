@@ -31,10 +31,10 @@ $$\fhat_n \;\in\; \operatorname*{arg\,min}_{f\in\FF}\; \frac{1}{n}\sum_{i=1}^{n}
 
 The population risk is $L(f) = \PP\bigl(f(X)\neq Y\bigr)$.
 
-**Recall (1).** If $f^*\in\operatorname*{arg\,min}_{f\in\FF} L(f)$ is the best classifier in $\FF$, then
+**Recall (1).** If $f^{\ast}\in\operatorname*{arg\,min}_{f\in\FF} L(f)$ is the best classifier in $\FF$, then
 
 $$\begin{equation}\label{eq:excess-risk}
-L(\fhat_n) - L(f^*) \;\leq\; 2\,\sup_{f\in\FF}\bigl|\Lhat_n(f)-L(f)\bigr|.
+L(\fhat_n) - L(f^{\ast}) \;\leq\; 2\,\sup_{f\in\FF}\bigl|\Lhat_n(f)-L(f)\bigr|.
 \end{equation}$$
 
 Our goal is to bound the supremum, i.e.\ to prove *uniform convergence* of $\Lhat_n$ to $L$ over $\FF$.
@@ -135,7 +135,7 @@ Dividing by $n$ concludes the proof. $\square$
 Combining the excess risk bound $\eqref{eq:excess-risk}$ with the symmetrisation lemma:
 
 $$\begin{equation}\label{eq:star}
-\E\bigl[L(\fhat_n)-L^*\bigr] \;\leq\; 4\,\E\Bigl[\sup_{f\in\FF}\;\Bigl| \frac{1}{n}\sum_{i=1}^{n}\varepsilon_i\,\1\{f(X_i)\neq Y_i\}\Bigr|\Bigr].
+\E\bigl[L(\fhat_n)-L^{\ast}\bigr] \;\leq\; 4\,\E\Bigl[\sup_{f\in\FF}\;\Bigl| \frac{1}{n}\sum_{i=1}^{n}\varepsilon_i\,\1\{f(X_i)\neq Y_i\}\Bigr|\Bigr].
 \end{equation}$$
 
 **Loss patterns equal classification patterns.** For two classifiers $f,g\in\FF$ and any $i$:
@@ -213,7 +213,7 @@ Combining $\eqref{eq:shattering-bound}$ with the Sauer–Shelah lemma:
 <div class="note-box note-thm">
 <span class="note-label">Final Bound for ERM</span>
 
-$$\E\bigl[L(\fhat_n) - L^*\bigr] \;\lesssim\; \sqrt{\frac{\VC(\FF)\,\log\!\bigl(\tfrac{n}{\VC(\FF)}\bigr)}{n}}.$$
+$$\E\bigl[L(\fhat_n) - L^{\ast}\bigr] \;\lesssim\; \sqrt{\frac{\VC(\FF)\,\log\!\bigl(\tfrac{n}{\VC(\FF)}\bigr)}{n}}.$$
 </div>
 
 **Summary.** By looking at all the classification patterns $\FF$ can produce on a dataset of size $n$, we obtain $S_n(\FF)$—a *combinatorial* measure of the richness of $\FF$. Once $n$ exceeds the VC dimension $d$, $S_n(\FF)$ grows only polynomially in $n$ (rather than exponentially), and the ERM bound becomes meaningful.

@@ -47,7 +47,7 @@ Throughout, $\E$ without subscript denotes expectation w.r.t.\ the joint distrib
 | $L(f) = \E_{(X,Y)\sim P}[\ell(f(X),Y)]$ | Population risk of predictor $f$ |
 | $\what L_n(f)=\frac{1}{n}\sum_{i=1}^n\ell(f(X_i),Y_i)$ | Empirical risk |
 | $f_{\mathrm B}$, $L_{\mathrm B}$ | Bayes predictor and Bayes risk |
-| $f^*\in\argmin_{f\in\Fclass}L(f)$ | Best predictor in model $\Fclass$ |
+| $f^{\ast}\in\argmin_{f\in\Fclass}L(f)$ | Best predictor in model $\Fclass$ |
 | $\what f_n\in\argmin_{f\in\Fclass}\what L_n(f)$ | ERM predictor |
 | $\Sigma=\E[XX^\top]$ | Second-moment matrix of $X$ |
 | $\what\Sigma_n=\frac{1}{n}\sum_i X_iX_i^\top$ | Empirical second-moment matrix |
@@ -120,7 +120,7 @@ and minimises over $\Fclass$: $\what f_n\in\argmin_{f\in\Fclass}\what L_n(f)$.
 <div class="note-box note-ex">
 <span class="note-label">Example — MLE as ERM</span>
 
-Parametric model $\{p_\theta:\theta\in\Theta\}$. The MLE $\what\theta_n = \argmin_\theta\frac{1}{n}\sum_i(-\log p_\theta(Z_i))$ is ERM with loss $\ell(\theta,z)=-\log p_\theta(z)$. The excess risk is $\KL(P_{\theta^*}\|P_\theta)$.
+Parametric model $\{p_\theta:\theta\in\Theta\}$. The MLE $\what\theta_n = \argmin_\theta\frac{1}{n}\sum_i(-\log p_\theta(Z_i))$ is ERM with loss $\ell(\theta,z)=-\log p_\theta(z)$. The excess risk is $\KL(P_{\theta^{\ast}}\|P_\theta)$.
 </div>
 
 <div class="note-box note-ex">
@@ -156,11 +156,11 @@ For $M\succ 0$, $\norm{u}_M=\sqrt{u^\top M u}=\norm{M^{1/2}u}$. In the eigenbasi
 
 If $\Sigma=\E[XX^\top]\succ 0$, then $L(\cdot)$ is strictly convex and the unique minimiser is
 
-$$\theta^* = \Sigma^{-1}\E[YX].$$
+$$\theta^{\ast} = \Sigma^{-1}\E[YX].$$
 </div>
 
 <div class="note-proof">
-<em>Proof.</em> The gradient is $\nabla L(\theta) = -2\,\E\bigl[(Y-\ip{\theta,X})\,X\bigr]$. The Hessian is $\nabla^2 L(\theta)=2\Sigma\succ 0$, so $L$ is strictly convex. Setting $\nabla L(\theta^*)=0$ gives $\E[YX]=\Sigma\,\theta^*$. $\square$
+<em>Proof.</em> The gradient is $\nabla L(\theta) = -2\,\E\bigl[(Y-\ip{\theta,X})\,X\bigr]$. The Hessian is $\nabla^2 L(\theta)=2\Sigma\succ 0$, so $L$ is strictly convex. Setting $\nabla L(\theta^{\ast})=0$ gives $\E[YX]=\Sigma\,\theta^{\ast}$. $\square$
 </div>
 
 <div class="note-box note-err">
@@ -181,7 +181,7 @@ The original notes state: for $F(\theta)=\tfrac{1}{2}\ip{A\theta,\theta}$ with $
 
 #### The OLS Estimator
 
-Since $\theta^*$ involves unknown $\Sigma$ and $\E[YX]$, we replace expectations by sample averages:
+Since $\theta^{\ast}$ involves unknown $\Sigma$ and $\E[YX]$, we replace expectations by sample averages:
 
 $$\begin{equation}\label{eq:OLS}
 \what\theta_n^{\,\mathrm{LS}}
@@ -213,11 +213,11 @@ $$\E\bigl[(Y-f(X))^2\bigr] = \E\bigl[(Y-\eta(X))^2\bigr] + \E\bigl[(\eta(X)-f(X)
 <em>Proof.</em> Write $Y-f(X) = (Y-\eta(X))+(\eta(X)-f(X))$. Expanding and taking $\E$, the cross term vanishes by the tower property: $\E\bigl[(Y-\eta(X))(\eta(X)-f(X))\bigr] = \E\bigl[(\eta(X)-f(X))\,\underbrace{\E[Y-\eta(X)\mid X]}_{=0}\bigr]=0$. $\square$
 </div>
 
-**Well-specification for linear regression.** $\Flin$ is well-specified iff $\eta(x)=\ip{\theta^*,x}$ for some $\theta^*$, equivalently $Y=\ip{\theta^*,X}+\varepsilon$ with $\E[\varepsilon\mid X]=0$.
+**Well-specification for linear regression.** $\Flin$ is well-specified iff $\eta(x)=\ip{\theta^{\ast},x}$ for some $\theta^{\ast}$, equivalently $Y=\ip{\theta^{\ast},X}+\varepsilon$ with $\E[\varepsilon\mid X]=0$.
 
 #### Relevance of Linearity: Embeddings
 
-If $Y=\sum_{j=1}^d\theta_j^*\varphi_j(X)$ for some basis $\varphi_1,\dots,\varphi_d$, define $\Phi(X)=(\varphi_1(X),\dots,\varphi_d(X))$; then $Y=\ip{\theta^*,\Phi(X)}$ is linear *in the features* $\Phi(X)$. Examples: polynomial regression, Fourier bases, expert aggregation.
+If $Y=\sum_{j=1}^d\theta_j^{\ast}\varphi_j(X)$ for some basis $\varphi_1,\dots,\varphi_d$, define $\Phi(X)=(\varphi_1(X),\dots,\varphi_d(X))$; then $Y=\ip{\theta^{\ast},\Phi(X)}$ is linear *in the features* $\Phi(X)$. Examples: polynomial regression, Fourier bases, expert aggregation.
 
 ### 1.6 Risk Bounds for OLS
 
@@ -229,19 +229,19 @@ If $Y=\sum_{j=1}^d\theta_j^*\varphi_j(X)$ for some basis $\varphi_1,\dots,\varph
 For any $\theta\in\R^d$:
 
 $$\begin{equation}\label{eq:excess-elliptic}
-L(\theta)-L(\theta^*) = \norm{\theta-\theta^*}_\Sigma^2.
+L(\theta)-L(\theta^{\ast}) = \norm{\theta-\theta^{\ast}}_\Sigma^2.
 \end{equation}$$
 </div>
 
 <div class="note-proof">
-<em>Proof.</em> Expand $L(\theta)-L(\theta^*) = \E[\ip{\theta^*-\theta,X}^2] + 2\E[(Y-\ip{\theta^*,X})\ip{\theta^*-\theta,X}]$. The first term is $\norm{\theta-\theta^*}_\Sigma^2$. The second equals $2\ip{\theta^*-\theta,\;\E[(Y-\ip{\theta^*,X})X]}=0$ by the optimality condition. $\square$
+<em>Proof.</em> Expand $L(\theta)-L(\theta^{\ast}) = \E[\ip{\theta^{\ast}-\theta,X}^2] + 2\E[(Y-\ip{\theta^{\ast},X})\ip{\theta^{\ast}-\theta,X}]$. The first term is $\norm{\theta-\theta^{\ast}}_\Sigma^2$. The second equals $2\ip{\theta^{\ast}-\theta,\;\E[(Y-\ip{\theta^{\ast},X})X]}=0$ by the optimality condition. $\square$
 </div>
 
-**Consequence.** $L(\what\theta_n)-L(\theta^*)=\norm{\what\theta_n-\theta^*}_\Sigma^2\asto 0$ by LLN, proving consistency.
+**Consequence.** $L(\what\theta_n)-L(\theta^{\ast})=\norm{\what\theta_n-\theta^{\ast}}_\Sigma^2\asto 0$ by LLN, proving consistency.
 
 #### Fixed-Design, Well-Specified Model
 
-**Model.** $Y_i=\ip{\theta^*,x_i}+\xi_i$, $x_i\in\R^d$ fixed, $\xi_i$ i.i.d.\ with $\E[\xi_i]=0$, $\E[\xi_i^2]=\sigma^2$. Let $\Sigma_n=\frac{1}{n}\mathbb X^\top\mathbb X$.
+**Model.** $Y_i=\ip{\theta^{\ast},x_i}+\xi_i$, $x_i\in\R^d$ fixed, $\xi_i$ i.i.d.\ with $\E[\xi_i]=0$, $\E[\xi_i^2]=\sigma^2$. Let $\Sigma_n=\frac{1}{n}\mathbb X^\top\mathbb X$.
 
 <div class="note-box note-thm">
 <span class="note-label">Theorem 1.1 — Exact excess risk, fixed design</span>
@@ -249,14 +249,14 @@ L(\theta)-L(\theta^*) = \norm{\theta-\theta^*}_\Sigma^2.
 If $\Sigma_n\succ 0$, the OLS satisfies
 
 $$\begin{equation}\label{eq:fixed-design}
-\E_Y\bigl[L(\what\theta_n)\bigr]-L(\theta^*) = \sigma^2\,\frac{d}{n}.
+\E_Y\bigl[L(\what\theta_n)\bigr]-L(\theta^{\ast}) = \sigma^2\,\frac{d}{n}.
 \end{equation}$$
 </div>
 
 <div class="note-proof">
-<em>Proof.</em> Since $Y=\mathbb X\theta^*+\xi$, we have $\what\theta_n-\theta^*=(\mathbb X^\top\mathbb X)^{-1}\mathbb X^\top\xi$. By Proposition 1.3 (with $\Sigma_n$):
+<em>Proof.</em> Since $Y=\mathbb X\theta^{\ast}+\xi$, we have $\what\theta_n-\theta^{\ast}=(\mathbb X^\top\mathbb X)^{-1}\mathbb X^\top\xi$. By Proposition 1.3 (with $\Sigma_n$):
 
-$$\E_Y[L(\what\theta_n)]-L(\theta^*) = \E_\xi\bigl[\norm{\what\theta_n-\theta^*}_{\Sigma_n}^2\bigr] = \frac{1}{n}\,\E_\xi\bigl[\xi^\top\Pi\,\xi\bigr],$$
+$$\E_Y[L(\what\theta_n)]-L(\theta^{\ast}) = \E_\xi\bigl[\norm{\what\theta_n-\theta^{\ast}}_{\Sigma_n}^2\bigr] = \frac{1}{n}\,\E_\xi\bigl[\xi^\top\Pi\,\xi\bigr],$$
 
 where $\Pi=\mathbb X(\mathbb X^\top\mathbb X)^{-1}\mathbb X^\top$ is the projector onto $\mathrm{Im}(\mathbb X)$. Using $\E[\xi\xi^\top]=\sigma^2 I_n$: $\E[\xi^\top\Pi\xi]=\sigma^2\Tr(\Pi)=\sigma^2 d$. $\square$
 </div>
@@ -266,25 +266,25 @@ where $\Pi=\mathbb X(\mathbb X^\top\mathbb X)^{-1}\mathbb X^\top$ is the project
 <div class="note-box note-prop">
 <span class="note-label">Proposition 1.4 — Random design excess risk</span>
 
-Under $Y=\ip{\theta^*,X}+\xi$, $\E[\xi\mid X]=0$, $\E[\xi^2\mid X]=\sigma^2$, if $n\geq d$:
+Under $Y=\ip{\theta^{\ast},X}+\xi$, $\E[\xi\mid X]=0$, $\E[\xi^2\mid X]=\sigma^2$, if $n\geq d$:
 
-$$\E\bigl[L(\what\theta_n)\bigr]-L(\theta^*) = \frac{\sigma^2}{n}\;\E\bigl[\Tr(\what\Sigma_n^{-1}\Sigma)\bigr].$$
+$$\E\bigl[L(\what\theta_n)\bigr]-L(\theta^{\ast}) = \frac{\sigma^2}{n}\;\E\bigl[\Tr(\what\Sigma_n^{-1}\Sigma)\bigr].$$
 
 Under mild distributional assumptions this is of order $\sigma^2 d/n$.
 </div>
 
 #### Model Selection via Truncation
 
-Consider $Y=\sum_{k=1}^\infty\theta_k^*\varphi_k(X)+\xi$ and truncated models $\Fclass_K$. Let $R_K=\sum_{k>K}(\theta_k^*)^2$ (energy of truncated tail).
+Consider $Y=\sum_{k=1}^\infty\theta_k^{\ast}\varphi_k(X)+\xi$ and truncated models $\Fclass_K$. Let $R_K=\sum_{k>K}(\theta_k^{\ast})^2$ (energy of truncated tail).
 
 <div class="note-box note-err">
 <span class="note-label">Errata — Approximation error (original notes, eq. (1.4.16))</span>
 
-The original notes claim $\inf_{f\in\Fclass_K}L(f)-L(f^*)=R_K+\sigma^2$.
+The original notes claim $\inf_{f\in\Fclass_K}L(f)-L(f^{\ast})=R_K+\sigma^2$.
 
-**Correction.** The Bayes risk is $L(f^*)=\sigma^2$ (irreducible noise), and the best risk in $\Fclass_K$ is $\sigma^2+R_K$. Hence the approximation error is
+**Correction.** The Bayes risk is $L(f^{\ast})=\sigma^2$ (irreducible noise), and the best risk in $\Fclass_K$ is $\sigma^2+R_K$. Hence the approximation error is
 
-$$\inf_{f\in\Fclass_K}L(f)-L(f^*) = R_K,$$
+$$\inf_{f\in\Fclass_K}L(f)-L(f^{\ast}) = R_K,$$
 
 *without* the $+\sigma^2$ term. The **total excess risk** is $R_K + (R_K+\sigma^2)\frac{K}{n}$, not $(R_K+\sigma^2)(1+\frac{K}{n})$.
 </div>
@@ -295,12 +295,12 @@ $$\inf_{f\in\Fclass_K}L(f)-L(f^*) = R_K,$$
 <span class="note-label">Proposition 1.5 — ERM excess risk via uniform convergence</span>
 
 $$\begin{equation}\label{eq:unif-conv}
-L(\what f_n) - L(f^*) \;\leq\; 2\sup_{f\in\Fclass}\abs{\what L_n(f)-L(f)}.
+L(\what f_n) - L(f^{\ast}) \;\leq\; 2\sup_{f\in\Fclass}\abs{\what L_n(f)-L(f)}.
 \end{equation}$$
 </div>
 
 <div class="note-proof">
-<em>Proof.</em> Write $L(\what f_n)-L(f^*) = [L(\what f_n)-\what L_n(\what f_n)] + \underbrace{[\what L_n(\what f_n)-\what L_n(f^*)]}_{\leq\,0} + [\what L_n(f^*)-L(f^*)]$. The middle term is $\leq 0$ by definition of ERM; bound each remaining term by $\sup_{f\in\Fclass}|\what L_n(f)-L(f)|$. $\square$
+<em>Proof.</em> Write $L(\what f_n)-L(f^{\ast}) = [L(\what f_n)-\what L_n(\what f_n)] + \underbrace{[\what L_n(\what f_n)-\what L_n(f^{\ast})]}_{\leq\,0} + [\what L_n(f^{\ast})-L(f^{\ast})]$. The middle term is $\leq 0$ by definition of ERM; bound each remaining term by $\sup_{f\in\Fclass}|\what L_n(f)-L(f)|$. $\square$
 </div>
 
 <div class="note-box note-rem">
@@ -373,7 +373,7 @@ All share a complexity parameter controlling the bias–variance trade-off.
 Let $\Fclass=\{f_1,\dots,f_M\}$. For any $\delta\in(0,1)$, with probability $\geq 1-\delta$:
 
 $$\begin{equation}\label{eq:PAC-finite}
-L(\what f_n)-L(f^*) \;\leq\; 2\sqrt{\frac{\log M+\log(2/\delta)}{2n}}.
+L(\what f_n)-L(f^{\ast}) \;\leq\; 2\sqrt{\frac{\log M+\log(2/\delta)}{2n}}.
 \end{equation}$$
 </div>
 
@@ -397,7 +397,7 @@ $$\ell_{\log}(y,s) = \log(1+e^{-ys}).$$
 The logistic regression estimator is $\what\theta_n = \argmin_\theta \frac{1}{n}\sum_{i=1}^n\log(1+e^{-Y_i\ip{\theta,X_i}})$.
 </div>
 
-**Probabilistic interpretation.** The logistic model assumes $P(Y=1\mid X=x)=\sigma(\ip{\theta^*,x})$. Under this model, $\what\theta_n$ is the MLE.
+**Probabilistic interpretation.** The logistic model assumes $P(Y=1\mid X=x)=\sigma(\ip{\theta^{\ast},x})$. Under this model, $\what\theta_n$ is the MLE.
 
 **Classification calibration.** The logistic loss is *classification-calibrated*: small excess logistic risk implies small excess classification risk (Bartlett–Jordan–McAuliffe, 2006).
 
@@ -435,7 +435,7 @@ The Bayes classifier is $f_{\mathrm B}(x)=\argmax_k\;\delta_k(x)$, where:
 <div class="note-box note-def">
 <span class="note-label">Definition 2.4 — Poisson regression</span>
 
-$Y\mid X\;\sim\;\mathrm{Poisson}(\lambda(X))$ with $\log\lambda(X)=\ip{\theta^*,X}$. The MLE minimises
+$Y\mid X\;\sim\;\mathrm{Poisson}(\lambda(X))$ with $\log\lambda(X)=\ip{\theta^{\ast},X}$. The MLE minimises
 
 $$\what L_n(\theta) = \frac{1}{n}\sum_{i=1}^n\bigl[e^{\ip{\theta,X_i}}-Y_i\ip{\theta,X_i}\bigr] + \text{const}.$$
 </div>
@@ -443,7 +443,7 @@ $$\what L_n(\theta) = \frac{1}{n}\sum_{i=1}^n\bigl[e^{\ip{\theta,X_i}}-Y_i\ip{\t
 <div class="note-box note-def">
 <span class="note-label">Definition 2.5 — Generalised linear model</span>
 
-$Y\mid X$ belongs to an exponential family $p(y,\eta)=\exp(y\eta-A(\eta)+c(y))$, and the natural parameter is linear: $\eta(X)=\ip{\theta^*,X}$. Equivalently, $g(\E[Y\mid X])=\ip{\theta^*,X}$ where $g=(A')^{-1}$ is the **canonical link**.
+$Y\mid X$ belongs to an exponential family $p(y,\eta)=\exp(y\eta-A(\eta)+c(y))$, and the natural parameter is linear: $\eta(X)=\ip{\theta^{\ast},X}$. Equivalently, $g(\E[Y\mid X])=\ip{\theta^{\ast},X}$ where $g=(A')^{-1}$ is the **canonical link**.
 </div>
 
 | GLM | $\mathcal Y$ | Family | Link $g$ | $A(\eta)$ |

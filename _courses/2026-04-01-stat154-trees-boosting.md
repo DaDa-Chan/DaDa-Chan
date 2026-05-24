@@ -57,9 +57,9 @@ For each fixed $j$, the minimisation over $s$ only requires scanning the $n$ obs
 
 1. Initialise the partition $\mathcal{P} \gets \{R_0\}$ where $R_0 = \R^d$ (all data in one region)
 2. **While** there exists a leaf $R\in\mathcal{P}$ with $|R| > n_{\min}$:
-   - For each such leaf $R$, compute the best split $(j_R^*, s_R^*)$ by minimising RSS over all features $j$ and thresholds $s$
-   - Select the leaf $R^*$ whose best split yields the largest decrease in RSS
-   - Replace $R^*$ in $\mathcal{P}$ by $R^*_{\text{left}} = \{x\in R^*: x_{j^*} < s^*\}$ and $R^*_{\text{right}} = \{x\in R^*: x_{j^*}\geq s^*\}$
+   - For each such leaf $R$, compute the best split $(j_R^{\ast}, s_R^{\ast})$ by minimising RSS over all features $j$ and thresholds $s$
+   - Select the leaf $R^{\ast}$ whose best split yields the largest decrease in RSS
+   - Replace $R^{\ast}$ in $\mathcal{P}$ by $R^{\ast}_{\text{left}} = \{x\in R^{\ast}: x_{j^{\ast}} < s^{\ast}\}$ and $R^{\ast}_{\text{right}} = \{x\in R^{\ast}: x_{j^{\ast}}\geq s^{\ast}\}$
 3. Assign prediction $\hat{y}_{R} = \frac{1}{|R|}\sum_{i:\,x_i\in R}y_i$ in each leaf $R\in\mathcal{P}$
 </div>
 
@@ -75,14 +75,14 @@ where $|T|$ is the number of terminal nodes. As $\alpha$ increases, branches are
 <div class="algo-title">Algorithm 2: Building a Regression Tree with Pruning</div>
 
 **Input:** Training data $(x_i,y_i)_{i=1}^n$; number of CV folds $K$  
-**Output:** A pruned regression tree $T^*$
+**Output:** A pruned regression tree $T^{\ast}$
 
 1. Grow a large tree $T_0$ by recursive binary splitting (Algorithm 1)
 2. For a grid of $\alpha$ values, compute the best subtree $T_\alpha\subseteq T_0$ minimising $C_\alpha(T)$
-3. Use $K$-fold cross-validation to select $\alpha^*$:
+3. Use $K$-fold cross-validation to select $\alpha^{\ast}$:
    - For each fold $k=1,\dots,K$: grow $T_0^{(-k)}$ on all folds except $k$; prune to $T_\alpha^{(-k)}$ for each $\alpha$; evaluate MSE on the held-out $k$-th fold
-   - Set $\alpha^* = \argmin_\alpha\;\text{average CV error}(\alpha)$
-4. **Return** $T^* = T_{\alpha^*}$
+   - Set $\alpha^{\ast} = \argmin_\alpha\;\text{average CV error}(\alpha)$
+4. **Return** $T^{\ast} = T_{\alpha^{\ast}}$
 </div>
 
 ### 1.3 Classification Trees
@@ -127,10 +127,10 @@ An **ensemble method** combines many simple *base learners* into a single strong
 **Output:** Bagged predictor $\hat{f}_{\mathrm{bag}}$
 
 - For $b=1,\dots,B$:
-  - Draw a bootstrap sample $(x_1^{*b},y_1^{*b}),\dots,(x_n^{*b},y_n^{*b})$ by sampling $n$ observations **with replacement**
-  - Grow a deep, unpruned tree $\hat{f}^{*b}$ on this bootstrap sample
-- **Regression:** $\hat{f}_{\mathrm{bag}}(x) = \frac{1}{B}\sum_{b=1}^{B}\hat{f}^{*b}(x)$
-- **Classification:** $\hat{G}_{\mathrm{bag}}(x) = \text{majority vote of }\hat{G}^{*1}(x),\dots,\hat{G}^{*B}(x)$
+  - Draw a bootstrap sample $(x_1^{\ast b},y_1^{\ast b}),\dots,(x_n^{\ast b},y_n^{\ast b})$ by sampling $n$ observations **with replacement**
+  - Grow a deep, unpruned tree $\hat{f}^{\ast b}$ on this bootstrap sample
+- **Regression:** $\hat{f}_{\mathrm{bag}}(x) = \frac{1}{B}\sum_{b=1}^{B}\hat{f}^{\ast b}(x)$
+- **Classification:** $\hat{G}_{\mathrm{bag}}(x) = \text{majority vote of }\hat{G}^{\ast 1}(x),\dots,\hat{G}^{\ast B}(x)$
 </div>
 
 ### 2.3 Out-of-Bag (OOB) Error
@@ -153,7 +153,7 @@ Bagging reduces variance by averaging, but if a single strong predictor dominate
 
 - For $b=1,\dots,B$:
   - Draw a bootstrap sample of size $n$
-  - Grow a deep tree $\hat{f}^{*b}$, but at **each split**:
+  - Grow a deep tree $\hat{f}^{\ast b}$, but at **each split**:
     - Select $m$ features uniformly at random from $\{1,\dots,d\}$
     - Choose the best split *among these $m$ features only*
 - Aggregate as in bagging (average for regression, majority vote for classification)

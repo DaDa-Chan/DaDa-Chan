@@ -23,13 +23,13 @@ $$
 
 ## 1. Motivation: From Dot Products to Kernels
 
-Recall that in the SVM dual formulation, the optimal Lagrange multiplier vector $\mu^{*}$ is determined by solving a quadratic program whose data-dependence enters *solely* through the matrix of pairwise dot products
+Recall that in the SVM dual formulation, the optimal Lagrange multiplier vector $\mu^{\ast}$ is determined by solving a quadratic program whose data-dependence enters *solely* through the matrix of pairwise dot products
 
 $$\widetilde{K} = \bigl(\ip{y_i x_i}{\, y_j x_j}\bigr)_{1\leq i,j\leq n}.$$
 
 More precisely, defining $\tilde{x}_i = y_i x_i$ and $\mathbb{1}=(1,\dots,1)^\top\in\R^n$, the dual reads
 
-$$\mu^{*} = \operatorname*{argmax}_{\mu\in\R_+^n} \Bigl\{\ip{\mathbb{1}}{\mu} - \tfrac{1}{2}\,\norm{\mu}_{\widetilde{K}}^2\Bigr\}.$$
+$$\mu^{\ast} = \operatorname*{argmax}_{\mu\in\R_+^n} \Bigl\{\ip{\mathbb{1}}{\mu} - \tfrac{1}{2}\,\norm{\mu}_{\widetilde{K}}^2\Bigr\}.$$
 
 This is a canonical quadratic program with a simple convex constraint (the non-negative orthant $\R_+^n$), efficiently solvable by libraries such as `cvxpy`.
 
@@ -143,7 +143,7 @@ Problem $(\star)$ requires optimising over $\Hcal$, which may be infinite-dimens
 
 Let $\varphi\colon\Xcal\to\Hcal$ be a feature map and $x_1,\dots,x_n\in\Xcal$ input vectors. Then the solution to $(\star)$ lies in $\operatorname{Span}\bigl(\{\varphi(x_i)\}_{1\leq i\leq n}\bigr)$, i.e.\ it is of the form
 
-$$f^{*} = \sum_{i=1}^{n} \alpha_i\,\varphi(x_i)$$
+$$f^{\ast} = \sum_{i=1}^{n} \alpha_i\,\varphi(x_i)$$
 
 for some coefficients $\alpha_1,\dots,\alpha_n\in\R$.
 </div>
@@ -160,5 +160,5 @@ Starting from a classification problem in $\R^d$ that may not be linearly separa
 
 1. Choose a PSD kernel $K$ (equivalently, choose an RKHS $\Hcal$ and the canonical feature map $\varphi(x)=K(x,\cdot)$).
 2. Replace every inner product $\ip{x_i}{x_j}$ in the algorithm by $K(x_i,x_j) = \ipH{\varphi(x_i)}{\varphi(x_j)}$.
-3. By the representer theorem, the optimiser is $f^{*}=\sum_i \alpha_i\,\varphi(x_i)$, so only the $n\times n$ kernel matrix $K_n$ is needed — $\varphi$ is never computed explicitly.
+3. By the representer theorem, the optimiser is $f^{\ast}=\sum_i \alpha_i\,\varphi(x_i)$, so only the $n\times n$ kernel matrix $K_n$ is needed — $\varphi$ is never computed explicitly.
 
