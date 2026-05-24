@@ -13,23 +13,29 @@ redirect_from:
 
 Education
 ======
-* B.S. in Your Major, Your University, 20XX
-
-Work Experience
+* Undergraduate, STAT, Zhejiang University, 2023-present
+  *GPA: 89/100 
+  * Mathematical Analysis: 95/100
+  * Probability Theory: 92/100
+  * Stochastic Processes: 95/100
+* Visiting student, STAT, UC Berkeley, 01/2026 - 05/2026, 26Sp
+  * STAT230A: A
+  * STAT154: A+
+  * DATA C100: A
+  * CS189: A
+Research Experience
 ======
-* 20XX - Present: Your Role
-  * Company/Organization
-  * Description of your work
-
+* 08/2025- Present: 
+  * Organization: Center for Data Science
+  * Projects: Deep Learning method for Proximal Causal Inference
 Skills
 ======
-* Skill Category 1
-  * Sub-skill 1.1
-  * Sub-skill 1.2
-* Skill Category 2
+* Proficient;
+  * Python(Numpy, Pandas, matplot, seaborn, Sklearn, Pytorch)
+  * Git
+  * SQL
+* Conversant:
+  * R
+  * C++
+  * LaTex
 
-Publications
-======
-  <ul>{% for post in site.publications reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
